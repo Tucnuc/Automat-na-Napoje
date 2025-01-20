@@ -1,0 +1,521 @@
+@font-face {
+   font-family: jawbreak;
+   src: url(./fonts/Jawbreak-SansCut.ttf);
+}
+
+body {
+   margin: 0;
+   width: 100%;
+   height: 100%;
+   user-select: none;
+   overflow: hidden;
+}
+
+#background {
+   height: 100%;
+   width: 100%;
+   background-size: cover;
+   background-image: url(./images/menu.png);
+   position: absolute;
+   z-index: -1;
+}
+
+#menu {
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   font-family: jawbreak;
+   gap: 20px;
+   z-index: 1;
+}
+#headingCon {
+   margin: 0 0 50px 0;
+   width: 1157.060px;
+   height: 128px;
+}
+#heading {
+   background-image: linear-gradient(0deg, #71797E, white);
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+   -webkit-background-clip: text;
+   font-size: 120px;
+   margin: 0;
+   position: absolute;
+}
+.top {
+   z-index: 2;
+}
+.bottom {
+   text-shadow: 3px 3px 10px #1B1212;
+}
+.bottom2 {
+   text-shadow: 1px 1px 5px black;
+   z-index: 1;
+}
+.bottom2 {
+   text-shadow: 1px 1px 5px black;
+   z-index: 1;
+}
+.menuText {
+   background-image: linear-gradient(0deg, #71797E, white);
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+   -webkit-background-clip: text;
+   font-size: 50px;
+   margin: 0;
+   position: absolute;
+   padding-bottom: 3px;
+}
+.menuBtn:hover .menuText {
+   background-image: linear-gradient(0deg, white, white);
+}
+.menuBtn {
+   width: 600px;
+   height: 80px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 10px;
+   border: 2px solid #a7acb0;
+   cursor: pointer;
+}
+.btnFill {
+   background-color: #71797E;
+   width: 100%;
+   height: 100%;
+   border-radius: 10px;
+   opacity: 0.6;
+}
+
+.test {
+   position: absolute;
+   top: 2;
+   z-index: 99;
+}
+
+#indexCon {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+#index {
+   width: 1330px;
+   height: 700px;
+   z-index: 10;
+   background-image: url(./images/indexBackground.png);
+   background-size: cover;
+   border-radius: 10px;
+   border: 2px solid #a7acb0;
+   user-select: none;
+}
+.indexDrinkCon {
+   width: 300px;
+   height: 350px;
+   margin-bottom: 20px;
+}
+.indexImg {
+   background-color: #a7acb0;
+   width: 300px;
+   height: 300px;
+   z-index: 1;
+   background-size: cover;
+   border-radius: 10px;
+}
+.drinkName {
+   font-family: jawbreak;
+   font-size: 34px;
+   margin: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 300px;
+   height: 50px;
+   color: white;
+}
+
+#indexScroller {
+   width: 100%;
+   height: 100%;
+   overflow-x: hidden;
+   overflow-y: auto;
+}
+::-webkit-scrollbar {
+   margin-left: 5px;
+}
+::-webkit-scrollbar-track {
+   background-color: #007FFF;
+   border-radius: 100vw;
+   border: 2px solid #a7acb0;
+   background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+   background-image: linear-gradient(270deg, #71797E, white);
+   border-radius: 100vw;
+}
+#indexCloseBtn {
+   width: 40px;
+   position: absolute;
+   cursor: pointer;
+}
+
+.needsPadding {
+   padding-right: 16px;
+}
+
+.indexHeading {
+   font-family: jawbreak;
+   font-size: 70px;
+   margin: 0;
+   text-align: center;
+   margin-bottom: 25px;
+}
+
+.commonText {
+   color: white;
+}
+.commonBorder {
+   border: 2px solid white;
+   border-radius: 10px;
+}
+.commonDrinks {
+   display: grid;
+   grid-template-columns: 1.5fr 1fr 1.5fr;
+   justify-items: center;
+}
+
+.uncommonText {
+   color: #50C878;
+}
+.uncommonBorder {
+   border: 2px solid #50C878;
+   border-radius: 10px;
+}
+.uncommonDrinks {
+   display: grid;
+   grid-template-columns: 1.5fr 1fr 1.5fr;
+   justify-items: center;
+}
+
+.rareText {
+   background: linear-gradient(to right, #007FFF, #007FFF, #359aff, #007FFF, #007FFF);
+   background-size: 200%;
+   background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   animation: textAnimation 8s linear infinite;
+}
+.rareBorder {
+   border: 2px solid #007FFF;
+   border-radius: 10px;
+}
+.rareDrinks {
+   display: flex;
+   justify-items: center;
+   flex-wrap: wrap;
+   justify-content: center;
+   column-gap: 106px;
+}
+@keyframes textAnimation {
+   0% {
+      background-position: 0%;
+   }
+   100% {
+      background-position: 200%;
+   }
+}
+
+.epicText {
+   background: linear-gradient(to right, #5D3FD3, #7957ff, #5D3FD3, #4f23ff, #5D3FD3);
+   background-size: 200%;
+   background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   animation: textAnimation 4s linear infinite;
+}
+.epicBorder {
+   border: 2px solid #5D3FD3;
+   border-radius: 10px;
+}
+.epicDrinks {
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.legendaryText {
+   background: linear-gradient(to right, gold, #ffbc05, gold, #ffbc05, gold, rgb(255, 235, 119), gold);
+   background-size: 200%;
+   background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   animation: textAnimation 2.5s linear infinite;
+}
+.legendaryBorder {
+   border: 2px solid gold;
+   border-radius: 10px;
+}
+.legendaryDrinks {
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.uncommonHeading, .rareHeading, .epicHeading, .legendaryHeading {
+   margin-top: 40px;
+}
+
+@keyframes fade-in {
+   0% { opacity: 0 }
+   100% { opacity: 1 }
+}
+@keyframes fade-in2 {
+   0% { opacity: 0 }
+   100% { opacity: 0.5 }
+}
+@keyframes fade-out {
+   0% { opacity: 1 }
+   100% { opacity: 0 }
+}
+@keyframes slide-up {
+   0% { transform: translateY(100%) }
+   100% { transform: translateY(0) }
+}
+
+#index::backdrop {
+   background: rgb(0 0 0 / 0.5);
+   opacity: 0;
+}
+
+#index[open] {
+   animation:
+      slide-up 750ms ease forwards,
+      fade-in 750ms ease forwards;
+}
+#index[open]::backdrop {
+   animation: fade-in 750ms forwards;
+}
+#index[closing] {
+   animation: fade-out 500ms ease forwards;
+}
+#index[closing]::backdrop {
+   animation: fade-out 500ms ease forwards;
+}
+
+#indexCompletionRate {
+   position: absolute;
+   bottom: 0;
+   background-image: linear-gradient(0deg, #71797E, white);
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+   -webkit-background-clip: text;
+   font-family: jawbreak;
+   font-size: 30px;
+   margin: 0;
+   left: 4px;
+   bottom: 1px;
+}
+
+#moveBlur {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   background-color: black;
+   opacity: 0;
+   display: none;
+   z-index: 100;
+}
+
+#moveBlur[appear] {
+   animation: fade-in 1000ms forwards ease;
+}
+#moveBlur[disappear] {
+   animation: fade-out 1000ms forwards ease;
+}
+
+.indexIcon {
+   fill: url(#indexIconBtnGradient);
+}
+#indexBtn2:hover .indexIcon {
+   fill: white;
+}
+
+#indexIcon {
+   z-index: 1;
+   height: 70px;
+   position: absolute;
+}
+
+#status {
+   position: absolute;
+   bottom: 0;
+   z-index: 2;
+   height: 90px;
+   width: 400px;
+   left: 20px;
+   display: none;
+   gap: 10px;
+}
+
+#indexBtn2 {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   border: 2px solid #a7acb0;
+   cursor: pointer;
+   height: 90px;
+   width: 100px;
+}
+
+.statusBtnFill {
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   border-bottom-right-radius: 0;
+   border-bottom-left-radius: 0; 
+}
+
+#goldDisplay {
+   height: 90px;
+   width: 290px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   border: 2px solid #a7acb0;
+   user-select: none;
+}
+
+.goldCounter {
+   position: absolute;
+   z-index: 1;
+   font-family: jawbreak;
+   background-image: linear-gradient(0deg, #71797E, white);
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+   -webkit-background-clip: text;
+   font-size: 50px;
+   margin: 0;
+}
+
+.goldCounter[red] {
+   background-image: linear-gradient(0deg, red, red);
+}
+
+.top2 {
+   z-index: 20;
+}
+
+#buyBtn {
+   width: 120px;
+   height: 120px;
+   background: radial-gradient(circle, #ffffff 0%, rgba(255,0,0,0) 70%);
+   top: 45%;
+   right: 710px;
+   display: none;
+}
+@keyframes glowing {
+   0% { opacity: 1; }
+   100% { opacity: 0; }
+}
+
+.eventBtn {
+   animation: glowing 1250ms infinite alternate ease-in-out;
+   z-index: 10;
+   cursor: pointer;
+   border-radius: 50%;
+   position: absolute;
+   width: 120px;
+   height: 120px;
+}
+
+#rollCon {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   gap: 35px;
+}
+
+#rollImg {
+   height: 400px;
+   width: 400px;
+   border-radius: 10px;
+   position: absolute;
+   z-index: 1;
+   background-size: cover;
+   display: none;
+   opacity: 0;
+}
+#rollGlow {
+   height: 750px;
+   width: 750px;
+   position: absolute;
+   display: none;
+   opacity: 0;
+}
+
+#rollImgCon {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 500px;
+   height: 500px;
+   z-index: 101;
+   display: none;
+}
+
+.rollText {
+   font-family: jawbreak;
+   font-size: 50px;
+   margin: 0;
+   z-index: 102;
+}
+
+#rollHeading {
+   font-size: 80px;
+   display: none;
+   opacity: 0;
+}
+
+#rollName {
+   display: none;
+   opacity: 0;
+}
+
+#rollGlow[rolling] {
+   animation: fade-in 2.5s forwards ease-in;
+}
+#rollGlow[unrolling] {
+   animation: fade-out 500ms forwards;
+}
+
+#rollHeading[appear], #rollName[appear], #rollImg[appear] {
+   animation: fade-in 750ms forwards ease-in;
+}
+#rollHeading[disappear], #rollName[disappear], #rollImg[disappear] {
+   animation: fade-out 500ms forwards;
+}
+
+#streetBtn {
+   background: radial-gradient(circle, #84BDD2 0%, rgba(255,0,0,0) 70%);
+   top: 50%;
+   left: 650px;
+   display: none;
+}
+
+#automatBtn {
+   background: radial-gradient(circle, white 0%, rgba(255,0,0,0) 70%);
+   bottom: 10px;
+   left: calc(50% - 60px);
+   display: none;
+}

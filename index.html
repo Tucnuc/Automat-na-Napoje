@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <div id="menu">
+        <div id="headingCon">
+            <p id="heading" class="top">THE WENDING MACHINE</p>
+            <p id="heading" class="bottom">THE WENDING MACHINE</p>
+        </div>
+        <div class="menuBtn" id="playBtn">
+            <p class="menuText top">PLAY</p>
+            <p class="menuText bottom2">PLAY</p>
+            <div class="btnFill"></div>
+        </div>
+        <div class="menuBtn" id="indexOpenBtn">
+            <p class="menuText top">INDEX</p>
+            <p class="menuText bottom2">INDEX</p>
+            <div class="btnFill"></div>
+        </div>
+        <div class="menuBtn">
+            <p class="menuText top">RESET DATA</p>
+            <p class="menuText bottom2">RESET DATA</p>
+            <div class="btnFill"></div>
+        </div>
+    </div>
+
+    <div id="indexCon">
+        <dialog id="index">
+            <p id="indexCompletionRate">0/25</p>
+            <svg id="indexCloseBtn" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                viewBox="0 0 460.775 460.775" xml:space="preserve">
+                <defs>
+                    <linearGradient id="indexCloseBtnGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#71797E;stop-opacity:1" />
+                    </linearGradient>
+                    <style>
+                        #indexCloseBtn:hover path {
+                            fill: white;
+                        }
+                    </style>
+                </defs>
+                <path fill="url(#indexCloseBtnGradient)" d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+                    c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+                    c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+                    c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+                    l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+                    c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
+            </svg>
+            <div id="indexScroller">
+                <p class="indexHeading commonText needsPadding">Common Drinks</p>
+                <div class="commonDrinks needsPadding">
+                </div>
+                <p class="indexHeading uncommonText uncommonHeading needsPadding">Uncommon Drinks</p>
+                <div class="uncommonDrinks needsPadding">
+                </div>
+                <p class="indexHeading rareText rareHeading needsPadding">Rare Drinks</p>
+                <div class="rareDrinks needsPadding">
+                </div>
+                <p class="indexHeading epicText epicHeading needsPadding">Epic Drinks</p>
+                <div class="epicDrinks needsPadding">
+                </div>
+                <p class="indexHeading legendaryText legendaryHeading needsPadding">Legendary Drinks</p>
+                <div class="legendaryDrinks needsPadding">
+                </div>
+            </div>
+        </dialog>
+    </div>
+
+    <div id="status">
+        <div id="indexBtn2">
+            <svg id="indexIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 103.19 122.88">
+                <defs>
+                    <linearGradient id="indexIconBtnGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#71797E;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <path class="indexIcon" d="M17.16 0h82.72a3.32 3.32 0 013.31 3.31v92.32c-.15 2.58-3.48 2.64-7.08 2.48H15.94c-4.98 0-9.05 4.07-9.05 9.05s4.07 9.05 9.05 9.05h80.17v-9.63h7.08v12.24c0 2.23-1.82 4.05-4.05 4.05H16.29C7.33 122.88 0 115.55 0 106.59V17.16C0 7.72 7.72 0 17.16 0zm3.19 13.4h2.86c1.46 0 2.66.97 2.66 2.15v67.47c0 1.18-1.2 2.15-2.66 2.15h-2.86c-1.46 0-2.66-.97-2.66-2.15V15.55c.01-1.19 1.2-2.15 2.66-2.15z" fill-rule="evenodd" clip-rule="evenodd"/>
+            </svg>
+            <div class="btnFill statusBtnFill"></div>
+        </div>
+        <div id="goldDisplay">
+            <p class="goldCounter top2"></p>
+            <p class="goldCounter bottom2"></p>
+            <div class="btnFill statusBtnFill"></div>
+        </div>
+    </div>
+
+    <div id="buyBtn" class="eventBtn"></div>
+    <div id="streetBtn" class="eventBtn"></div>
+    <div id="automatBtn" class="eventBtn"></div>
+
+    <div class="eventBtn lootBtn"></div>
+    <div class="eventBtn lootBtn"></div>
+    <div class="eventBtn lootBtn"></div>
+    <div class="eventBtn lootBtn"></div>
+    <div class="eventBtn lootBtn"></div>
+
+    <div id="rollCon">
+        <p id="rollHeading" class="commonText rollText"></p>
+        <div id="rollImgCon">
+            <div id="rollImg" class="commonBorder"></div>
+            <img id="rollGlow" src="">
+        </div>
+        <p id="rollName" class="commonText rollText"></p>
+    </div>
+    
+    <div id="background"></div>
+    <div id="moveBlur"></div>
+    
+    <audio autoplay loop id="music">
+        <source src="./music/menu.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio src="" id="sfx" type="audio/mpeg"></audio>
+    <audio src="" id="rollSfx" type="audio/mpeg"></audio>
+    
+    <script src="script.js"></script>
+</body>
+</html>
