@@ -51,10 +51,11 @@ const napoje = {
 };
 
 class AutomatNaNapoje {
-    constructor(napoje, money=0, chances) {
+    constructor(napoje, money=0, chances, streetChances) {
         this.napoje = napoje;
         this.money = money;
         this.chances = chances
+        this.streetChances = streetChances;
 
         this.dialog = document.getElementById('index');
         this.openBtn = document.getElementById('indexOpenBtn');
@@ -65,7 +66,7 @@ class AutomatNaNapoje {
         this.unlockedDrinks = [];
         this.indexCompletionRate = document.getElementById('indexCompletionRate');
 
-        this.sfx = new Audio(document.getElementById('sfx'));
+        this.sfx = new Audio(document.getElementById('sfx'), 0.015);
         this.rollSfx = new Audio(document.getElementById('rollSfx'));
     }
 
@@ -163,8 +164,9 @@ class AutomatNaNapoje {
         }, { once: true });
     }
 
-    updateGoldCounter() {
+    updateGoldCounter(gold=0) {
         const goldCounters = document.querySelectorAll('.goldCounter');
+        this.money += gold;
         goldCounters.forEach(counter => {
             counter.textContent = `GOLD: ${this.money}`;
         });
@@ -206,6 +208,8 @@ class AutomatNaNapoje {
         const rollHeading = document.getElementById('rollHeading');
         const rollName = document.getElementById('rollName');
 
+        this.sfx.changeVolume(0.15);
+
         blur.style.display = 'block';
         blur.setAttribute('appear', '');
         blur.addEventListener('animationend', () => {
@@ -233,7 +237,6 @@ class AutomatNaNapoje {
             this.money -= 10;
             this.updateGoldCounter();
 
-            this.sfx.changeVolume(0.3);
             this.sfx.changeSong('./music/sfx/roll.mp3');
             
             setTimeout(() => {
@@ -277,10 +280,6 @@ class AutomatNaNapoje {
                 }
             }, 2500);
 
-
-
-
-
             setTimeout(() => {
                 blur.setAttribute('disappear', '');
                 rollGlow.setAttribute('unrolling', '');
@@ -319,7 +318,7 @@ class AutomatNaNapoje {
 
     }
 
-    chooseDrink() {        
+    chooseDrink() {
         const rarities = [
             this.napoje.common,
             this.napoje.uncommon,
@@ -363,7 +362,7 @@ const locationList = {
 }
 
 class Audio {
-    constructor(element=document.getElementById('music'), volume=0.1) {
+    constructor(element=document.getElementById('music'), volume=0.02) {
         this.audio = element;
         this.audio.volume = volume;
     }
@@ -404,6 +403,11 @@ class Hra {
 
     initialize() {
         this.updateCurrentLocationData('menu');
+        document.querySelectorAll('.lootBtn').forEach(btn => {
+            btn.addEventListener('click', (event) => {
+                this.lootHandler(event.target.parentElement);
+            });
+        });
     }
 
     resetData() {}
@@ -430,15 +434,19 @@ class Hra {
                 streetBtn.style.display = 'none';
                 automatBtn.style.display = 'block';
 
-                const chances = [0.55, 0.3, 0.15];
-                let randomIndex = this.automat.getRandomWithWeights(chances) + 2;
+                let randomIndex = this.automat.getRandomWithWeights(this.automat.streetChances) + 2;
                 const keys = Object.keys(locationList);
                 const chosenStreet = this.locationList[keys[randomIndex]];
                 this.updateCurrentLocationData(chosenStreet.id);
+
+                this.streetBtnHandler();
             } else {
                 this.buyBtn.style.display = 'block';
                 streetBtn.style.display = 'block';
                 automatBtn.style.display = 'none';
+                document.querySelectorAll('.lootBtn').forEach(btn => {
+                    btn.style.display = 'none';
+                });
                 this.updateCurrentLocationData('automat');
             }
             background.style.backgroundImage = this.locationList[this.curLocName].backgroundImage;
@@ -454,6 +462,87 @@ class Hra {
         }, { once: true });
     }
 
+    streetBtnHandler() {
+        const lootSpotsChances = {
+            commonStreet: [0.6, 0.3, 0.1, 0, 0],
+            uncommonStreet: [0.4, 0.3, 0.2, 0.1, 0],
+            rareStreet: [0, 0.1, 0.2, 0.4, 0.3]
+        };
+        let lootSpots = this.automat.getRandomWithWeights(lootSpotsChances[this.curLocName]) + 1;
+        for (let i = 0; i < lootSpots; i++) {
+            document.querySelectorAll('.lootBtn')[i].style.display = 'block';
+            document.getElementById('lootBtn'+(i+1)).style.display = 'flex';
+            console.log('loot');
+        }
+    }
+
+    lootHandler(parentElement) {
+        const goldChances = {
+            commonStreet: [0.7, 0.3, 0],
+            uncommonStreet: [0.5, 0.4, 0.1],
+            rareStreet: [0, 0.65, 0.35]
+        };
+        const goldIndex = this.automat.getRandomWithWeights(goldChances[this.curLocName]);
+        const gold = [1, 9, 81][goldIndex];
+        const goldImg = ['./images/loot/loot1.png', './images/loot/loot2.png', './images/loot/loot3.png'][goldIndex];
+        const goldGlow = ['./images/glows/glowcommon.png', './images/glows/glowuncommon.png', './images/glows/glowrare.png'][goldIndex];
+        const goldSfx = ['./music/sfx/tier0.mp3', './music/sfx/tier1.mp3', './music/sfx/tier2.mp3'][goldIndex];
+
+        const lootImg = parentElement.querySelector('.lootImg');
+        const lootGlow = parentElement.querySelector('.lootGlow');
+        const lootBtn = parentElement.querySelector('.lootBtn');
+        const goldCounters = document.querySelectorAll('.goldCounter');
+
+        lootImg.src = goldImg;
+        lootGlow.src = goldGlow;
+
+        setTimeout(() => {
+            lootBtn.style.display = 'none';
+        }, 150);
+
+        lootImg.style.display = 'block';
+        lootGlow.style.display = 'block';
+        lootImg.setAttribute('appear', '');
+        lootGlow.setAttribute('appear', '');
+        setTimeout(() => {
+            lootImg.setAttribute('disappear', '');
+            lootGlow.setAttribute('disappear', '');
+            lootImg.addEventListener('animationend', () => {
+                lootImg.removeAttribute('appear');
+                lootGlow.removeAttribute('appear');
+                lootImg.removeAttribute('disappear');
+                lootGlow.removeAttribute('disappear');
+                lootImg.style.display = 'none';
+                lootGlow.style.display = 'none';
+            }, { once: true });
+        }, 1500);
+
+        setTimeout(() => {
+            this.automat.rollSfx.changeSong(goldSfx);
+        }, 200);
+
+        setTimeout(() => {
+            this.automat.updateGoldCounter(gold);
+            goldCounters.forEach(counter => {
+                counter.setAttribute('green', '');
+                setTimeout(() => {
+                    counter.removeAttribute('green');
+                }, 125);
+            });
+            const interval = setInterval(() => {
+                goldCounters.forEach(counter => {
+                    counter.setAttribute('green', '');
+                    setTimeout(() => {
+                        counter.removeAttribute('green');
+                    }, 125);
+                });
+            }, 250);
+            setTimeout(() => {
+                clearInterval(interval);
+            }, 400);
+        }, 300);
+    }
+
     updateCurrentLocationData(location) {
         this.curLocName = location;
         this.curLocMoveBtn = this.locationList[location].moveBtn;
@@ -463,9 +552,12 @@ class Hra {
     }
 }
 
-const chances = [0.5, 0.3, 0.15, 0.04, 0.01];
-// const chances = [0, 0, 0, 0.4, 0.6];
-const automatNaNapoje = new AutomatNaNapoje(napoje, 9999, chances);
+const drinkChances = [0.5, 0.3, 0.15, 0.04, 0.01];
+// const drinkChances = [0, 0, 0, 0.4, 0.6];    // for testing
+const streetChances = [0.55, 0.3, 0.15];
+// const streetChances = [0.1, 0.4, 0.5];    // for testing
+
+const automatNaNapoje = new AutomatNaNapoje(napoje, 0, drinkChances, streetChances);
 automatNaNapoje.initialize();
 
 const audio = new Audio();

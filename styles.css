@@ -313,6 +313,7 @@ body {
    background-clip: text;
    -webkit-text-fill-color: transparent;
    -webkit-background-clip: text;
+   max-height: fit-content;
    font-family: jawbreak;
    font-size: 30px;
    margin: 0;
@@ -405,7 +406,10 @@ body {
 }
 
 .goldCounter[red] {
-   background-image: linear-gradient(0deg, red, red);
+   background-image: linear-gradient(0deg, #EE4B2B, #EE4B2B);
+}
+.goldCounter[green] {
+   background-image: linear-gradient(0deg, #46bd6d, #46bd6d);
 }
 
 .top2 {
@@ -518,4 +522,66 @@ body {
    bottom: 10px;
    left: calc(50% - 60px);
    display: none;
+}
+
+.lootBtn {
+   background: radial-gradient(circle, gold 0%, rgba(255,0,0,0) 70%);
+   position: absolute;
+}
+
+#lootBtn1 {
+   bottom: 300px;
+   left: 100px;
+   display: none;
+}
+#lootBtn2 {
+   top: 200px;
+   right: 300px;
+   display: none;
+}
+#lootBtn3 {
+   bottom: 350px;
+   right: 30%;
+   display: none;
+}
+#lootBtn4 {
+   bottom: 500px;
+   left: 330px;
+   display: none;
+}
+#lootBtn5 {
+   bottom: 150px;
+   right: 50px;
+   display: none;
+}
+
+.lootGlow {
+   width: 120px;
+   height: 120px;
+   position: absolute;
+   z-index: 11;
+   display: none;
+}
+.lootImg {
+   position: absolute;
+   width: 70px;
+   height: 70px;
+   z-index: 12;
+   display: none;
+}
+
+.lootCon {
+   position: absolute;
+   height: 120px;
+   width: 120px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.lootImg[appear], .lootGlow[appear] {
+   animation: fade-in 300ms forwards ease-in;
+}
+.lootImg[disappear], .lootGlow[disappear] {
+   animation: fade-out 300ms forwards ease-out;
 }
