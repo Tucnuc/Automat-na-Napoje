@@ -12,7 +12,7 @@ class Napoj {
     }
 }
 
-const napoje = {
+let napoje = {
     common: [
         new Napoj("Mineral Water", 0, "common", "url(./images/drinks/common/water.png)"),
         new Napoj("Fruit Tea", 1, "common", "url(./images/drinks/common/tea.png)"),
@@ -66,7 +66,7 @@ class AutomatNaNapoje {
         this.unlockedDrinks = [];
         this.indexCompletionRate = document.getElementById('indexCompletionRate');
 
-        this.sfx = new Audio(document.getElementById('sfx'), 0.015);
+        this.sfx = new Audio(document.getElementById('sfx'), 0.2);
         this.rollSfx = new Audio(document.getElementById('rollSfx'));
     }
 
@@ -76,6 +76,7 @@ class AutomatNaNapoje {
         this.closeBtn.addEventListener('click', () => this.closeDrinkIndex());
         document.getElementById('buyBtn').addEventListener('click', () => this.buyDrink(this.money));
         this.updateGoldCounter();
+        this.indexCompletionRate.textContent = `${this.unlockedDrinks.length}/25`;
     }
 
     generateDrinks() {
@@ -104,12 +105,11 @@ class AutomatNaNapoje {
                 drinkName.classList.add(tier + 'Text');
                 drinkName.textContent = drink.unlocked ? drink.jmeno : '???';
 
-                if (drink.unlocked) { this.unlockedDrinks.push(drink) };
                 indexDrinkCon.appendChild(indexImg);
                 indexDrinkCon.appendChild(drinkName);
                 con.appendChild(indexDrinkCon);
             });
-            this.indexCompletionRate.textContent = `${this.unlockedDrinks.length}/25`;
+            this.updateDrinks();
         };
 
         generateElements('common', commonDrinks);
@@ -208,7 +208,7 @@ class AutomatNaNapoje {
         const rollHeading = document.getElementById('rollHeading');
         const rollName = document.getElementById('rollName');
 
-        this.sfx.changeVolume(0.15);
+        this.sfx.changeVolume(0.35);
 
         blur.style.display = 'block';
         blur.setAttribute('appear', '');
@@ -217,6 +217,7 @@ class AutomatNaNapoje {
             let selectedDrink = this.chooseDrink();
             if (!selectedDrink.unlocked) {
                 selectedDrink.unlock();
+                this.unlockedDrinks.push(selectedDrink);
             }
             rollImgCon.style.display = 'flex';
             rollGlow.style.display = 'block';
@@ -311,7 +312,7 @@ class AutomatNaNapoje {
                     rollHeading.style.display = 'none';
                     rollName.style.display = 'none';
 
-                    this.sfx.changeVolume(0.015);
+                    this.sfx.changeVolume(0.2);
                 }, { once: true });
             }, delay);
         }, { once: true });
@@ -362,7 +363,7 @@ const locationList = {
 }
 
 class Audio {
-    constructor(element=document.getElementById('music'), volume=0.02) {
+    constructor(element=document.getElementById('music'), volume=0.1) {
         this.audio = element;
         this.audio.volume = volume;
     }
@@ -403,14 +404,14 @@ class Hra {
 
     initialize() {
         this.updateCurrentLocationData('menu');
+        document.getElementById('saveBtn').addEventListener('click', () => this.saveGame());
+        document.getElementById('resetBtn').addEventListener('click', () => this.resetData());
         document.querySelectorAll('.lootBtn').forEach(btn => {
             btn.addEventListener('click', (event) => {
                 this.lootHandler(event.target.parentElement);
             });
         });
     }
-
-    resetData() {}
 
     changeLocation() {
         const blur = document.getElementById('moveBlur');
@@ -425,6 +426,7 @@ class Hra {
             if (this.curLocName === 'menu') {
                 document.getElementById('menu').style.display = 'none';
                 document.getElementById('status').style.display = 'flex';
+                document.getElementById('saveBtn').style.display = 'flex';
                 this.buyBtn.style.display = 'block';
                 streetBtn.style.display = 'block';
                 this.audio.changeSong("./music/main.mp3");
@@ -550,14 +552,102 @@ class Hra {
 
         this.curLocMoveBtn.addEventListener('click', () => { this.changeLocation() }, { once: true });
     }
+
+    saveGame() {
+        localStorage.setItem('money', this.automat.money);
+        localStorage.setItem('unlockedDrinks', JSON.stringify(this.automat.unlockedDrinks));
+        localStorage.setItem('save', 'saved');
+        console.log('Game saved');
+
+        const noticePopUp = document.getElementById('noticePopUp');
+        const noticeTexts = document.querySelectorAll('.noticeText');
+        noticeTexts.forEach(text => {
+            text.textContent = 'Game saved';
+        });
+        noticePopUp.style.display = 'flex';
+        noticePopUp.setAttribute('appear', '');
+        setTimeout(() => {
+            noticePopUp.setAttribute('disappear', '');
+            noticePopUp.addEventListener('animationend', () => {
+                noticePopUp.removeAttribute('appear');
+                noticePopUp.removeAttribute('disappear');
+                noticePopUp.style.display = 'none';
+            }, { once: true });
+        }, 2500);
+    }
+
+    resetData() {
+        localStorage.clear();
+        localStorage.setItem('reset', 'true');
+        location.reload();
+    }
 }
 
-const drinkChances = [0.5, 0.3, 0.15, 0.04, 0.01];
-// const drinkChances = [0, 0, 0, 0.4, 0.6];    // for testing
-const streetChances = [0.55, 0.3, 0.15];
-// const streetChances = [0.1, 0.4, 0.5];    // for testing
 
-const automatNaNapoje = new AutomatNaNapoje(napoje, 0, drinkChances, streetChances);
+
+let money = 0;
+const drinkChances = [0.5, 0.3, 0.15, 0.04, 0.01];
+// const drinkChances = [0, 0, 0, 0.4, 0.6];
+const streetChances = [0.55, 0.3, 0.15];
+// const streetChances = [0.1, 0.4, 0.5];
+
+
+if (localStorage.getItem('save') === 'saved') {
+    money = parseInt(localStorage.getItem('money'), 10);
+    console.log(`Gold loaded: ${money}`);
+    let unlockedDrinks = JSON.parse(localStorage.getItem('unlockedDrinks'));
+    console.log(unlockedDrinks);
+    for (let i = 0; i < unlockedDrinks.length; i++) {
+        const rarity = unlockedDrinks[i].rarity;
+        const index = unlockedDrinks[i].index;
+        const drink = napoje[rarity].find(d => d.index === index);
+
+        if (drink) {
+            console.log(`Unlocking drink: rarity=${rarity}, index=${index}`);
+            drink.unlock();
+        } else {
+            console.error(`Drink not found: rarity=${rarity}, index=${index}`);
+        }
+    }
+
+    const noticePopUp = document.getElementById('noticePopUp');
+    const noticeTexts = document.querySelectorAll('.noticeText');
+    noticeTexts.forEach(text => {
+        text.textContent = 'Game loaded';
+    });
+    noticePopUp.style.display = 'flex';
+    noticePopUp.setAttribute('appear', '');
+    setTimeout(() => {
+        noticePopUp.setAttribute('disappear', '');
+        noticePopUp.addEventListener('animationend', () => {
+            noticePopUp.removeAttribute('appear');
+            noticePopUp.removeAttribute('disappear');
+            noticePopUp.style.display = 'none';
+        }, { once: true });
+    }, 2500);
+}
+if (localStorage.getItem('reset') === 'true') {
+    localStorage.clear();
+    console.log('Data resetted');
+
+    const noticePopUp = document.getElementById('noticePopUp');
+    const noticeTexts = document.querySelectorAll('.noticeText');
+    noticeTexts.forEach(text => {
+        text.textContent = 'Data resetted';
+    });
+    noticePopUp.style.display = 'flex';
+    noticePopUp.setAttribute('appear', '');
+    setTimeout(() => {
+        noticePopUp.setAttribute('disappear', '');
+        noticePopUp.addEventListener('animationend', () => {
+            noticePopUp.removeAttribute('appear');
+            noticePopUp.removeAttribute('disappear');
+            noticePopUp.style.display = 'none';
+        }, { once: true });
+    }, 2500);
+}
+
+const automatNaNapoje = new AutomatNaNapoje(napoje, money, drinkChances, streetChances);
 automatNaNapoje.initialize();
 
 const audio = new Audio();

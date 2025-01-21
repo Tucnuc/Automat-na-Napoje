@@ -332,10 +332,10 @@ body {
 }
 
 #moveBlur[appear] {
-   animation: fade-in 1000ms forwards ease;
+   animation: fade-in 750ms forwards ease;
 }
 #moveBlur[disappear] {
-   animation: fade-out 1000ms forwards ease;
+   animation: fade-out 750ms forwards ease;
 }
 
 .indexIcon {
@@ -584,4 +584,90 @@ body {
 }
 .lootImg[disappear], .lootGlow[disappear] {
    animation: fade-out 300ms forwards ease-out;
+}
+
+#saveBtn {
+   position: absolute;
+   bottom: -2px;
+   right: 20px;
+   height: 90px;
+   width: 100px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   border: 2px solid #a7acb0;
+   cursor: pointer;
+   display: none;
+}
+
+#saveBtnIcon {
+   height: 75px;
+   position: absolute;
+   z-index: 1;
+}
+
+.saveBtnSvg {
+   fill: url(#saveBtnGradient);
+}
+
+#saveBtn:hover .saveBtnSvg {
+   fill: white;
+}
+
+#noticePopUp {
+   position: absolute;
+   right: -2px;
+   bottom: 150px;
+   z-index: 50;
+   height: 80px;
+   width: 320px;
+   border: 2px solid #a7acb0;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 0;
+   border-bottom-right-radius: 0;
+   border-bottom-left-radius: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   display: none;
+}
+
+.noticeText {
+   position: absolute;
+   z-index: 1;
+   font-family: jawbreak;
+   background-image: linear-gradient(0deg, #71797E, white);
+   background-clip: text;
+   -webkit-text-fill-color: transparent;
+   -webkit-background-clip: text;
+   font-size: 40px;
+}
+
+.noticeFill {
+   border-top-left-radius: 10px;
+   border-top-right-radius: 0;
+   border-bottom-right-radius: 0;
+   border-bottom-left-radius: 10px; 
+}
+
+.top3 {
+   z-index: 50;
+}
+
+@keyframes slide-left {
+   0% { transform: translateX(100%) }
+   100% { transform: translateX(0) }
+}
+@keyframes slide-right {
+   0% { transform: translateX(0) }
+   100% { transform: translateX(100%) }
+}
+
+#noticePopUp[appear] {
+   animation: slide-left 1000ms ease-in forwards;
+}
+#noticePopUp[disappear] {
+   animation: slide-right 1000ms ease-in forwards;
 }

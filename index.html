@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Vending Machine</title>
     <link rel="stylesheet" href="styles.css">
-
+    <link rel="icon" href="./images/pageIcon.png">
 </head>
 <body>
     <div id="menu">
@@ -23,7 +23,7 @@
             <p class="menuText bottom2">INDEX</p>
             <div class="btnFill"></div>
         </div>
-        <div class="menuBtn">
+        <div class="menuBtn" id="resetBtn">
             <p class="menuText top">RESET DATA</p>
             <p class="menuText bottom2">RESET DATA</p>
             <div class="btnFill"></div>
@@ -91,6 +91,26 @@
             <p class="goldCounter bottom2"></p>
             <div class="btnFill statusBtnFill"></div>
         </div>
+    </div>
+
+    <div id="saveBtn">
+        <svg version="1.1" id="saveBtnIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+            <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+            <defs>
+                <linearGradient id="saveBtnGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#71797E;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <g> <path class="saveBtnSvg" d="M231.3,10h-27c-2.5,0-2.5,2.5-2.5,2.5v66.4c0,0,0,4.9-4.9,4.9H59.2c0,0-4.9,0-4.9-4.9V29.7 c0,0,0-4.9,4.9-4.9h4.9c4.9,0,4.9,4.9,4.9,4.9v36.9c0,0,0,2.5,2.5,2.5h113.1c2.5,0,2.5-2.5,2.5-2.5V12.5c0,0,0-2.5-2.5-2.5H51.8 c-14.7,0-17.2,4.9-17.2,4.9L14.9,34.6c0,0-4.9,2.5-4.9,14.8v181.9c0,7.4,7.4,14.8,14.7,14.8h206.5c7.4,0,14.8-7.4,14.8-14.8V24.7 C246,17.4,238.6,10,231.3,10L231.3,10z M216.5,226.3c0,4.9-4.9,4.9-4.9,4.9H44.4c0,0-4.9,0-4.9-4.9v-79.6c0-3.7,2-6,2-6l9.9-9.9 c0,0,2.8-2.8,7.1-2.8h138.3c4.7,0,7.4,2.5,7.4,2.5l9.8,9.8c0,0,2.5,1.9,2.5,7.4V226.3L216.5,226.3z M199.3,201.8H56.7 c-2.7,0-4.9,2.2-4.9,4.9v4.9c0,2.7,2.2,4.9,4.9,4.9h142.6c2.7,0,4.9-2.2,4.9-4.9v-4.9h0C204.2,204,202,201.8,199.3,201.8z  M199.3,172.3H56.7c-2.7,0-4.9,2.2-4.9,4.9v4.9c0,2.7,2.2,4.9,4.9,4.9h142.6c2.7,0,4.9-2.2,4.9-4.9v-4.9h0 C204.2,174.5,202,172.3,199.3,172.3z M199.3,142.8H56.7c-2.7,0-4.9,2.2-4.9,4.9v4.9c0,2.7,2.2,4.9,4.9,4.9h142.6 c2.7,0,4.9-2.2,4.9-4.9v-4.9h0C204.2,145,202,142.8,199.3,142.8z"/></g>
+        </svg>
+        <div class="btnFill statusBtnFill"></div>
+    </div>
+
+    <div id="noticePopUp">
+        <p class="noticeText top3">Data Resetted</p>
+        <p class="noticeText bottom2">Data Resetted</p>
+        <div class="btnFill noticeFill"></div>
     </div>
 
     <div id="lootBtn1" class="lootCon">
