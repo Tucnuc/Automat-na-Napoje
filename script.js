@@ -233,7 +233,7 @@ class AutomatNaNapoje {
             this.money -= 10;
             this.updateGoldCounter();
 
-            this.sfx.changeVolume(0.1);
+            this.sfx.changeVolume(0.3);
             this.sfx.changeSong('./music/sfx/roll.mp3');
             
             setTimeout(() => {
@@ -363,7 +363,7 @@ const locationList = {
 }
 
 class Audio {
-    constructor(element=document.getElementById('music'), volume=0.015) {
+    constructor(element=document.getElementById('music'), volume=0.1) {
         this.audio = element;
         this.audio.volume = volume;
     }
@@ -464,7 +464,7 @@ class Hra {
 }
 
 const chances = [0.5, 0.3, 0.15, 0.04, 0.01];
-// const chances = [0, 0, 0, 0.5, 0.5];
+// const chances = [0, 0, 0, 0.4, 0.6];
 const automatNaNapoje = new AutomatNaNapoje(napoje, 9999, chances);
 automatNaNapoje.initialize();
 
