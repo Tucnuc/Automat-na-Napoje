@@ -7,4 +7,4 @@ Hra také obsahuje „Index“ nápojů, ve kterém se můžete podívat na kaž
 
 ### GitHub Pages: https://tucnuc.github.io/Automat-na-Napoje/
 
-OOP školní projekt.
+OOP školní projekt. Soundtrack je ze hry Abyss World na Robloxu.
